@@ -12,28 +12,8 @@ public class Vehicle {
         return new Vehicle(make, model);
     }
 
-    public boolean isSimilar2(final Vehicle other){
-        return compareMake(other.getMake()).average() >= 65 && compareModel(other.getModel()).average() >= 65;
-    }
-
-    private FuzzySearchResult compareMake(final String make){
-        return compare(prepareForComparison(this.make), prepareForComparison(make));
-    }
-
-    private FuzzySearchResult compareModel(final String model){
-        return compare(prepareForComparison(this.model), prepareForComparison(model));
-    }
-
-    private FuzzySearchResult compare(final String input, final String other) {
-        return new FuzzySearchResult.Builder()
-                .setSimpleRatio(ratio(input, other))
-                .setPartialRatio(partialRatio(input, other))
-                .setTokenSortPartialRatio(tokenSortPartialRatio(input, other))
-                .setTokenSortRatio(tokenSortRatio(input, other))
-                .setTokenSetRatio(tokenSetRatio(input, other))
-                .setTokenSetPartialRatio(tokenSetPartialRatio(input, other))
-                .setTokenWeightedRatio(weightedRatio(input, other))
-                .build();
+    public boolean isSimilarTo(final Vehicle another) {
+        return makeIsSimilarTo(another) && modelIsSimilarTo(another);
     }
 
     public String getMake() {
@@ -60,14 +40,47 @@ public class Vehicle {
         return input.trim().toLowerCase();
     }
 
+    private boolean makeIsSimilarTo(final Vehicle another) {
+        return compareTheMake(another.make).isSimilarEnough();
+    }
+
+    private FuzzySearchResult compareTheMake(final String make) {
+        return compare(prepareForComparison(this.make), prepareForComparison(make));
+    }
+
+    private boolean modelIsSimilarTo(final Vehicle another) {
+        return compareTheModel(another.model).isSimilarEnough();
+    }
+
+    private FuzzySearchResult compareTheModel(final String model) {
+        return compare(prepareForComparison(this.model), prepareForComparison(model));
+    }
+
+    private FuzzySearchResult compare(final String input, final String other) {
+        return new FuzzySearchResult.Builder()
+                .setSimpleRatio(ratio(input, other))
+                .setPartialRatio(partialRatio(input, other))
+                .setTokenSortPartialRatio(tokenSortPartialRatio(input, other))
+                .setTokenSortRatio(tokenSortRatio(input, other))
+                .setTokenSetRatio(tokenSetRatio(input, other))
+                .setTokenSetPartialRatio(tokenSetPartialRatio(input, other))
+                .setTokenWeightedRatio(weightedRatio(input, other))
+                .build();
+    }
+
     private static class FuzzySearchResult {
 
+        private static final int MATCH_RATIO_THRESHOLD = 65;
         private final int TOTAL_NUM_SEARCH_RESULT_RATIOS = 7;
         private final int simpleRatio, partialRatio,
-                tokenSortPartialRatio, tokenSortRatio, 
+                tokenSortPartialRatio, tokenSortRatio,
                 tokenSetRatio, tokenSetPartialRatio, tokenWeightedRatio;
 
-        public double average(){
+        public boolean isSimilarEnough(){
+            return average() >= MATCH_RATIO_THRESHOLD;
+        }
+
+        public double average() {
             return total() / TOTAL_NUM_SEARCH_RESULT_RATIOS;
         }
 
@@ -91,7 +104,7 @@ public class Vehicle {
         private static class Builder {
 
             private int simpleRatio, partialRatio,
-                    tokenSortPartialRatio, tokenSortRatio, 
+                    tokenSortPartialRatio, tokenSortRatio,
                     tokenSetRatio, tokenSetPartialRatio, tokenWeightedRatio;
 
             public Builder setSimpleRatio(final int simpleRatio) {
@@ -128,13 +141,13 @@ public class Vehicle {
                 this.tokenWeightedRatio = tokenWeightedRatio;
                 return this;
             }
-            
-            public FuzzySearchResult build(){
+
+            public FuzzySearchResult build() {
                 return new FuzzySearchResult(this);
             }
         }
 
-        private FuzzySearchResult(){
+        private FuzzySearchResult() {
             this(new Builder());
         }
 

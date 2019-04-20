@@ -1,2 +1,33 @@
 ﻿Is Similar,Make,Model,Compare to Make,Compare to Model
 TRUE,Honda,Accord,Honda,Accord
+TRUE,Honda,Accord,HONDA,Acord
+TRUE,Honda,Accord,Hona,Acord
+FALSE,Honda,Accord,Honda,Civic
+TRUE,Hona,Acord,HONDA,Acord
+FALSE,Honda,Accord,Toyota,Camry
+TRUE,Honda,Civic,Honda,Civic
+FALSE,Honda,Civic,Honda,Cv
+FALSE,Honda,Civic,Honda,CRV
+TRUE,Hyundai,Santa Fe,Hyundai,St Fe
+TRUE,Hyundai,Tucson,Hyundai,Tuson
+FALSE,BMW,430i,BMW,428i
+FALSE,Mercedes,C Class,BMW,325
+TRUE,Chevrolet,Cruze,Chevrolet,Cruise
+TRUE,Chevrolet,Cruze,Chevy,Cruise
+TRUE,Chevrole,Equinox,Chevy,Equinocks
+FALSE,Harley Davidson,Street 500,Harley Davidson,SR
+TRUE,Harley Davidson,Street 500,Harley,ST 500
+TRUE,Harley-D,SR,Harley,SR 500
+TRUE,Volkswagen,Jetta,Volkswagon,Jetta
+FALSE,Vw,Golf,Volkswagen,Golf
+TRUE,vw,golf wagon,vw,golf
+TRUE,Ford,F150,Ford,F150SD
+TRUE,Ford,F-150,Ford,F 150
+FALSE,Ford,F 150 Super Duty,Ford,F150SD
+FALSE,Ford,F 250,Ford,Focus
+TRUE,Nissan,Altima,Nissan,Alt
+TRUE,Nisan,Altima,Nissan,Altima-V6
+TRUE,Nissan,Altima 2.5 SR,Nissan,2.5 SR
+FALSE,Nissan,Exterra,Nissan,Altima
+TRUE,Ford,Crown Victoria,Ford,Crown Vic
+TRUE,Ford,Crown Victoria,Ford,CrownVic
