@@ -1,5 +1,6 @@
 package briscoe.fuzzy.matching;
 
+import static java.lang.String.format;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -16,7 +17,7 @@ public class VehicleTests {
 
         final boolean areVehiclesSimilar = vehicle.isSimilarTo(other);
         assertEquals(isSimilar, areVehiclesSimilar,
-                String.format("Expected isSimilar: %s for %s compared to %s", isSimilar, vehicle, other));
+                format("Expected isSimilar: %s for %s compared to %s", isSimilar, vehicle, other));
     }
 
 }
